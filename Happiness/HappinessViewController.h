@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FaceView.h"
 
 @interface HappinessViewController : UIViewController
+
+@property (nonatomic) int happiness; // 0 sad, 100 very happy
 
 @end

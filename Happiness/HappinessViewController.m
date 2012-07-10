@@ -9,26 +9,30 @@
 #import "HappinessViewController.h"
 
 @interface HappinessViewController ()
-
+@property (nonatomic,weak) IBOutlet FaceView *faceView;
 @end
 
 @implementation HappinessViewController
+@synthesize happiness=_happiness;
+@synthesize faceView=_faceView;
 
-- (void)viewDidLoad
+- (void)setHappiness:(int)happiness
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    _happiness = happiness;
+    [self.faceView setNeedsDisplay]; // any time our Model changes, redraw our View
 }
 
-- (void)viewDidUnload
+- (void)setFaceView:(FaceView *)faceView
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+    _faceView = faceView;
+    // enable pinch gestures in the FaceView using its pinch: handler
+    [self.faceView addGestureRecognizer:[[UIPinchGestureRecognizer alloc] initWithTarget:self.faceView action:@selector(pinch:)]];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return YES; // support all orientations
 }
+
 
 @end
